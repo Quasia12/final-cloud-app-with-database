@@ -1,7 +1,7 @@
 import sys
 from django.utils.timezone import now
 try:
-    from django.db import models
+    from django.db import models, question
 except Exception:
     print("There was an error loading django modules. Do you have django installed?")
     sys.exit()
@@ -54,6 +54,8 @@ class Learner(models.Model):
 
 # Course model
 class Course(models.Model):
+    class Course(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, default="")
     name = models.CharField(null=False, max_length=30, default='online course')
     image = models.ImageField(upload_to='course_images/')
     description = models.CharField(max_length=1000)
@@ -94,7 +96,27 @@ class Enrollment(models.Model):
     mode = models.CharField(max_length=5, choices=COURSE_MODES, default=AUDIT)
     rating = models.FloatField(default=5.0)
 
+class Question(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE,default="")
+    question_text = models.CharField(null=True,max_length=200)
+    grade = models.IntegerField(default=50)
 
+def is_get_score(self, selected_ids):
+    all_answers = self.choice_set.filter(is_correct=True).count()
+    selected_correct = self.choice_set.filter(is_correct=True, id__in=selected_ids).count()
+    if all_answers == selected_correct:
+        return True
+    else:
+        return False
+
+class Choice(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    content = models.CharField(max_length=200)
+    is_correct = models.BooleanField(default=False)
+
+class Submission(models.Model):
+    enrollment = models.ForeignKey(Enrollment, on_delete=models.CASCADE)
+    choices = models.ManyToManyField(Choice)
 # <HINT> Create a Question Model with:
     # Used to persist question content for a course
     # Has a One-To-Many (or Many-To-Many if you want to reuse questions) relationship with course
