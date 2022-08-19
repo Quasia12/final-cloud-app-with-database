@@ -1,7 +1,7 @@
 import sys
 from django.utils.timezone import now
 try:
-    from django.db import models, question
+    from django.db import models
 except Exception:
     print("There was an error loading django modules. Do you have django installed?")
     sys.exit()
@@ -54,8 +54,6 @@ class Learner(models.Model):
 
 # Course model
 class Course(models.Model):
-    class Course(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, default="")
     name = models.CharField(null=False, max_length=30, default='online course')
     image = models.ImageField(upload_to='course_images/')
     description = models.CharField(max_length=1000)

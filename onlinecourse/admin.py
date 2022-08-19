@@ -1,6 +1,6 @@
 from django.contrib import admin
 # <HINT> Import any new Models here
-from .models import Course, Lesson, Instructor, Learner, Choice
+from .models import Course, Lesson, Instructor, Learner, Choice, Question, Submission
 
 class ChoiceInline(admin.StackedInline):
     model = Choice
