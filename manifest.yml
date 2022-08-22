@@ -1,10 +1,10 @@
   applications:
-  - name: onlinecourse
+  - name: sbar
     routes: 
       - route: sbar.us-east.mybluemix.net
     memory: 128M
     buildpack: python_buildpack
-  - name: onlinecourse-nginx
+  - name: sbar-nginx
     routes:
       - route: sbar.us-south.cf.appdomain.cloud/static
     memory: 128M
