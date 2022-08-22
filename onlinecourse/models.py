@@ -108,7 +108,7 @@ def is_get_score(self, selected_ids):
         return False
 
 class Choice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE,default="")
     content = models.CharField(max_length=200)
     is_correct = models.BooleanField(default=False)
 
