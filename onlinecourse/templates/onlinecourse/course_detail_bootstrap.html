@@ -50,34 +50,32 @@
                 </div>
             {% endfor %}
         </div>
-        
-
+        {% if user.is_authenticated %}
+    </br>
+    <button class="btn btn-primary btn-block" data-toggle="collapse" data-target="#exam">Start Exam</button>
     <div id="exam" class="collapse">
-            Click to expand elements within the collapse div
-            </div>
         <form id="questionform" action="{% url 'onlinecourse:submit' course.id %}" method="POST">
-                    ... for each question in the course ...
-                    <div class="card mt-1">
-                        <div class="card-header"><h5>{{ question.question_text}}</h5></div>
-                        {% csrf_token %}
-                        <div class="form-group">
-                           ... for each choice in the question ...
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="checkbox" name="choice_{{choice.id}}"
-                                           class="form-check-input" id="{{choice.id}}"
-                                           value="{{choice.id}}">{{ choice.choice_text }}
-                                </label>
-                            </div>
+            {% for question in course.question_set.all %}
+            <div class="card mt-1">
+                <div class="card-header"><h5>{{ question.content }}</h5></div>
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {% for choice in question.choice_set.all %}
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="checkbox" name="choice_{{choice.id}}"
+                                       class="form-check-input" id="{{choice.id}}"
+                                       value="{{choice.id}}">{{ choice.content }}
+                            </label>
                         </div>
+                        {% endfor %}
                     </div>
-                <input class="btn btn-success btn-block" type="submit" value="Submit">
-        </form> -->
-            <!-- Task: show questions and choices -->
-            <!-- <HINT> Use Bootstrap Collapse to hide exam first, more details could be found here
-            https://www.w3schools.com/bootstrap4/bootstrap_collapse.asp-->
-
-            <!--
+                </div>
+                {% endfor %}
+            <input class="btn btn-success btn-block" type="submit" value="Submit">
+        </form>
+    </div>
+    {% endif %}
 
             A collapse example here:
             <div id="exam" class="collapse">

@@ -95,8 +95,8 @@ class Enrollment(models.Model):
     rating = models.FloatField(default=5.0)
 
 class Question(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE,default="")
-    question_text = models.CharField(null=True,max_length=200)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    content = models.CharField(max_length=200)
     grade = models.IntegerField(default=50)
 
 def is_get_score(self, selected_ids):
