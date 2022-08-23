@@ -11,7 +11,7 @@ import logging
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
- def submit(request, course_id):
+def submit(request, course_id):
     course = get_object_or_404(Course, pk=course_id)
     user = request.user
     enrollment = Enrollment.objects.get(user=user, course=course)
@@ -138,6 +138,7 @@ def enroll(request, course_id):
 def submit(request, course_id):
     choice_id = request.POST[key]
     submitted_anwsers.append(Choice.objects.get(id=choice_id))
+    
 # <HINT> A example method to collect the selected choices from the exam form from the request object
 def extract_answers(request):
     submitted_anwsers = []
