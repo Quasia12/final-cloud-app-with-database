@@ -135,9 +135,7 @@ def enroll(request, course_id):
          # Collect the selected choices from exam form
          # Add each selected choice object to the submission object
          # Redirect to show_exam_result with the submission id
-def submit(request, course_id):
-    choice_id = request.POST[key]
-    submitted_anwsers.append(Choice.objects.get(id=choice_id))
+
     
 # <HINT> A example method to collect the selected choices from the exam form from the request object
 def extract_answers(request):
