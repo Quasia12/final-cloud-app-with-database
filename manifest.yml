@@ -1,11 +1,11 @@
   applications:
   - name: sbar
     routes: 
-      - route: sbar.us-south.mybluemix.net
+      - route: sbar.mybluemix.net
     memory: 128M
     buildpack: python_buildpack
   - name: sbar-nginx
     routes:
-      - route: sbar.us-south.mybluemix.net/static
+      - route: sbar.mybluemix.net/static
     memory: 128M
     buildpack: staticfile_buildpack
